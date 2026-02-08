@@ -3,6 +3,14 @@ import Header from "./components/Header";
 import JsonEditor from "./components/JsonEditor";
 import ChartPreview from "./components/ChartPreview";
 import ResizableSplitView from "./components/ResizableSplitView";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 const SAMPLE_JSON = `{
   "data": [
@@ -48,6 +56,7 @@ function App() {
   const [jsonInput, setJsonInput] = useState(SAMPLE_JSON);
   const [shouldPlot, setShouldPlot] = useState(true);
   const [resetChart, setResetChart] = useState(false);
+  const [errorOpen, setErrorOpen] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(jsonInput);
@@ -65,7 +74,7 @@ function App() {
       const parsed = JSON.parse(jsonInput);
       setJsonInput(JSON.stringify(parsed, null, 2));
     } catch (err) {
-      alert("Invalid JSON: Cannot prettify");
+      setErrorOpen(true);
     }
   };
 
@@ -80,12 +89,12 @@ function App() {
   return (
     <div className="h-screen w-screen overflow-hidden bg-slate-100">
       <Header onReset={handleReset} onPlot={handlePlot} />
-      
+
       <div className="pt-16 h-full">
         <ResizableSplitView
           leftPane={
-            <JsonEditor 
-              value={jsonInput} 
+            <JsonEditor
+              value={jsonInput}
               onChange={setJsonInput}
               onCopy={handleCopy}
               onPrettify={handlePrettify}
@@ -101,6 +110,20 @@ function App() {
           }
         />
       </div>
+      <Dialog open={errorOpen} onOpenChange={setErrorOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Invalid JSON</DialogTitle>
+            <DialogDescription>
+              The JSON you entered is not valid and cannot be prettified.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="flex justify-end pt-4">
+            <Button onClick={() => setErrorOpen(false)}>OK</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
