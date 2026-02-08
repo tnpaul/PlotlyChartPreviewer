@@ -2,7 +2,10 @@
 
 A powerful, real-time web application for creating, editing, and previewing Plotly charts with an intuitive split-pane interface. Perfect for data scientists, analysts, and developers who want to rapidly prototype and visualize Plotly charts.
 
-![Plotly Chart Previewer](https://via.placeholder.com/1200x600/1e293b/ffffff?text=Replace+with+your+demo+GIF)
+<video width="100%" controls>
+  <source src="/demo/video1.m4v" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## 🚀 Live Demo
 
@@ -41,7 +44,7 @@ A powerful, real-time web application for creating, editing, and previewing Plot
 ## 📸 Screenshots
 
 ### Plotly chart preview
-![Editor with Line Numbers](/screenshots/screenshot1.png)
+![Editor with Line Numbers](/demo/screenshot1.png)
 
 
 ## 🎯 Why Use Plotly Chart Previewer?
